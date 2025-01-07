@@ -1,0 +1,23 @@
+#container{
+ height: 200px;
+ display: flex;
+ align-items: flex-end;
+ border: 2px solid black;
+}
+
+body{
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ background-color: #16C47F;
+}
+.bar{
+ width:15px;
+ background-color: #F4FFC3;
+ margin: 2px;
+}
+button{
+background-color: #A31D1D;
+color: white;
+border-radius: 4px;
+}
