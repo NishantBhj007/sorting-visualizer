@@ -1,80 +1,80 @@
+import { state } from "./appState/appState.js";
+import { getSortMoves } from "./algorithm/algoManager.js";
 import { playNote } from "./sound.js";
-let playButton = document.querySelector(".play");
-let initButton = document.querySelector(".init");
-const n = 15;
-let a = [n];
-init();
 
-function init() {
-  for (let i = 0; i < n; i++) {
-    a[i] = Math.floor((Math.random()) *60 );
-  }
-  console.log(a);
-
-  showBars();
-}
+let { n, arr, speed, moves, currentSort } = state;
 
 function play() {
-  const copy = [...a];
-  const moves = sort(copy);
+  const copy = [...arr];
+  moves = getSortMoves(copy);
   animate(moves);
 }
 
-function animate(moves) {
-  if (moves.length == 0) {
+function animate() {
+  if (moves.length === 0) {
     showBars();
     return;
   }
+
   const move = moves.shift();
   const [i, j] = move.indices;
-  if (move.type == "swap") {
-    [a[i], a[j]] = [a[j], a[i]];
+
+  if (move.type === "swap") {
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 
-  playNote(100 + a[i] * 400);
-  playNote(100 + a[j] * 400);
-
+  playNote(100 + arr[i] * 400);
+  playNote(100 + arr[j] * 400);
   showBars(move);
-  setTimeout(function () {
-    animate(moves);
-  }, 100);
-}
-/// bubble sort
 
-function sort(a) {
-  const moves = [];
-  for (let i = 0; i < a.length; i++) {
-    for (let b = 0; b < a.length; b++) {
-      if (a[b] > a[b + 1]) {
-        moves.push({
-          indices: [b, b + 1],
-          type: "swap",
-        });
-        let temp = a[b];
-        a[b] = a[b + 1];
-        a[b + 1] = temp;
-      }
-    }
-  }
-  console.log(a);
-  return moves;
+  const delay = 1000 - speed;
+  setTimeout(() => animate(), delay);
 }
 
 function showBars(move) {
-  container.innerHTML = "";
-  for (let i = 0; i < a.length; i++) {
+  const canvas = document.getElementById("canvas");
+  canvas.innerHTML = "";
+
+  arr.forEach((height, index) => {
     const bar = document.createElement("div");
-    bar.style.height = a[i] * 8 + "px";
-    bar.textContent=
+    bar.style.height = `${height * 8}px`;
     bar.classList.add("bar");
 
-    if (move && move.indices.includes(i)) {
-      bar.style.backgroundColor = move.type == "swap" ? "#FFD65A" : "#F93827";
+    if (move && move.indices.includes(index)) {
+      bar.style.backgroundColor = move.type === "swap" ? "#FFD65A" : "#F93827";
     }
-    container.appendChild(bar);
-  }
+    canvas.appendChild(bar);
+  });
 }
 
+init();
+initEventListeners();
 
-playButton.addEventListener("click", play);
-initButton.addEventListener("click", init);
+function init() {
+  speed = parseInt(document.getElementById("speedControl").value);
+  moves = [];
+  arr = Array.from({ length: n }, () => Math.floor(Math.random() * 60));
+  showBars();
+}
+
+function initEventListeners() {
+  const speedControl = document.getElementById("speedControl");
+  const algorithmLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  algorithmLinks.forEach(link => {
+    link.addEventListener("click", handleAlgorithmSelection);
+  });
+
+  function handleAlgorithmSelection(event) {
+    algorithmLinks.forEach(link => link.classList.remove("selected"));
+    event.target.classList.add("selected");
+    currentSort = event.target.id;
+    init();
+  }
+
+  speedControl.addEventListener("input", (event) => {
+    speed = parseInt(event.target.value);
+  });
+  document.querySelector(".play").addEventListener("click", play);
+  document.querySelector(".init").addEventListener("click", init);
+}
+

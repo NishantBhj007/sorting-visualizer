@@ -1,28 +1,28 @@
-#container {
-  height: 520px;
-  display: flex;
-  align-items: flex-end;
-  border: 2px solid black;
+#canvas-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: #16c47f;
+#canvas {
+    height: 520px;
+    width: fit-content;
+    margin: 50px;
+    align-items: flex-end;
 }
+
 .bar {
   width: 35px;
-  background-color: #f4ffc3;
+  background-color: #15c75f;
   margin: 2px;
+}
+
+.selected {
+    background-color: #efcaca !important;
+    color: white;
+    border-radius: 5px;
+  }
   
-}
-button {
-  background-color: #a31d1d;
-  color: white;
-  border-radius: 4px;
-  height: 38px;
-  width: 68px;
-  border: 0;
-  cursor: pointer;
-}
+
