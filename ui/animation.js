@@ -1,5 +1,6 @@
 import { state } from "../appState/appState.js";
 import { playNote } from "../sound.js";
+import { showBars } from "./bars.js";
 
 export function animate() {
   if (state.moves.length === 0) {
