@@ -1,4 +1,4 @@
-export const state = {
+export let state = {
     n: 15,
     arr: Array(15),
     currentSort: "bubbleSort",

@@ -4,10 +4,8 @@ import { sortInsertion } from "./insertionSort.js";
 import { sortHeap } from "./heapSort.js";
 import { state } from "../appState/appState.js";
 
-let { currentSort, moves } = state;
-
 export function getSortMoves(array) {
-    switch (currentSort) {
+    switch (state.currentSort) {
       case "bubbleSort":
         return sortBubble(array);
       case "quickSort":
