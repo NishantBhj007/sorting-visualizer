@@ -3,12 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 #canvas {
   height: 520px;
-  width: fit-content;
+  width: max-content;
   margin: 50px;
   align-items: flex-end;
 }
@@ -25,68 +25,31 @@
   border-radius: 5px;
 }
 
+
 @media (width < 460px) {
   .bar {
-    width: 3px;
-    margin: 0px;
+    width: 8px;
+    background-color: #15c75f;
+    margin: 0;
   }
-  #canvas {
-    height: 500px;
-    margin: -6px;
-    margin-left: 47px;
-    width: 303px;
-  }
+
   .gap-3 {
     gap: 0rem;
   }
-  .btn {
-    font-size: 10px;
-  }
-  .p-4 {
-    padding: 0px;
-  }
-  #canvas-container {
-    width: 300px;
-  }
 }
 
-@media (min-width: 461px) and (max-width: 643px) {
-  .bar {
-    width: 8px;
-    margin: 0px;
-  }
-  #canvas {
-    height: 480px;
-  }
-  .gap-3 {
-    gap: 2px;
-  }
-  .btn {
-    font-size: 10px;
-  }
-  .p-4 {
-    padding: 0px;
-  }
-  #canvas-container {
-    width: 530px;
-  }
-}
-
-@media (min-width: 646px) and (max-width: 996px) {
+@media (min-width: 460px) and (max-width: 650px) {
   .bar {
     width: 15px;
-    margin: 0px;
+    background-color: #15c75f;
+    margin: 0;
   }
-  #canvas {
-    height: 480px;
-  }
-  .gap-3 {
-    gap: 7px;
-  }
-  .btn {
-    font-size: 10px;
-  }
-  .p-4 {
-    padding: -5px;
+}
+
+@media (min-width: 650px) and (max-width: 1000px) {
+  .bar {
+    width: 20px;
+    background-color: #15c75f;
+    margin: 2px;
   }
 }
